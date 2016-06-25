@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="gb2312">
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <title>ANYMOCK3.0</title>
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.base-1.0.css">
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-font-1.0-full.css">
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-function-1.0-full.css">
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-button-1.0-full.css">
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-footer-1.0-full.css">
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-header-1.0-full.css">
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-form-1.0-full.css">
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-grid-1.0-full.css">
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-line-1.0-full.css">
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-message-1.0-full.css">
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-notice-1.0-full.css">
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-paging-1.0-full.css">
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-tab-1.0-full.css">
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-table-1.0-full.css">
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-tip-1.0-full.css">
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-nav-1.0-SNAPSHOT-full.css">
+                
+            <link href="/css/homepage.css" rel="stylesheet" type="text/css" />
+            <link href="/css/smart_wizard.css" rel="stylesheet" type="text/css" /> 
+            <link href="/css/tip-yellowsimple.css" rel="stylesheet" type="text/css" />
+            <link href="/scripts/codemirror-2.35/lib/codemirror.css" rel="stylesheet" type="text/css" />
+            <link href="/scripts/codemirror-2.35/theme/ambiance.css" rel="stylesheet" type="text/css" />           
+            
+            <script type="text/javascript" src="/scripts/lib/jquery.js"></script>
+            <script type="text/javascript" src="/scripts/lib/jquery.cookie.js"></script>
+            <script type="text/javascript" src="/scripts/lib/autoTextarea.js"></script>
+            <script type="text/javascript" src="/scripts/lib/nav-jquery.js"></script>
+            <script type="text/javascript" src="/scripts/lib/jquery.smartWizard-2.0.min.js"></script>
+             <script type="text/javascript" src="/scripts/lib/jquery.poshytip.min.js"></script>
+            <script type="text/javascript" src="/scripts/anymock_cookie.js"></script>
+            <script type="text/javascript" src="/scripts/anymock_setUpForm.js"></script>
+</head>
+<body>
+    <div class="layout">
+        <div class="header">
+            $tile.setTemplate("home:header.vm").setParameter('loginName',$loginName).setParameter('serverIp', $!serverIp)
+        </div>
+        <div class="header-nav">
+            $tile.setTemplate("home:nav.vm")
+        </div>
+        <div class="content">
+            $screen_placeholder
+        </div>
+        <div class="footer">
+            $tile.setTemplate("home:foot.vm")
+        </div>
+    </div>
+</body>
+</html>

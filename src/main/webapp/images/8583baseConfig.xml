@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="GBK"?>
+<j8583cn-config>
+<header length="5">0800</header>
+<!--签到解析-->
+<parseinfo msgtypeid="0800">
+<!-- 将实际需要取值作为唯一值的设置为 unique="true" -->
+<field id="3" datatype="NUMERIC" length="6" name="处理码" unique="true"/>
+<field id="25" datatype="BCD" length="2" name="服务点条件代码"/>
+<field id="41" datatype="ALPHA" length="8" name="终端号"/>
+<field id="42" datatype="ALPHA" length="15" name="商户号"/>
+<field id="60" datatype="LLLVAR" name="操作员号和敏感数据"/>
+</parseinfo>
+</j8583cn-config>

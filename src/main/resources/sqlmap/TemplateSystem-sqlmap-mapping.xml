@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+
+    
+    <resultMap id="RM.TemplateSystem" class="com.mock.common.dal.dataobject.TemplateSystemDO">
+		<result property="innerid" column="INNERID" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="communicationId" column="COMMUNICATION_ID" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="sysTemplate" column="SYS_TEMPLATE" javaType="java.lang.String" jdbcType="LONGVARCHAR"  />
+		<result property="macthdescription" column="MACTHDESCRIPTION" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="gmtCreate" column="GMT_CREATE" javaType="java.util.Date" jdbcType="TIMESTAMP"  />
+		<result property="gmtModified" column="GMT_MODIFIED" javaType="java.util.Date" jdbcType="TIMESTAMP"  />
+    </resultMap>
+    
+
+	
+	<select id="anymock.TemplateSystem.loadAll" resultMap="RM.TemplateSystem" >
+    	<![CDATA[
+				select
+ /*anymock.TemplateSystem.loadAll*/ 				  innerid,
+					communication_id,
+					sys_template,
+					macthdescription,
+          gmt_create,
+          gmt_modified
+				from anymock_template_system
+			]]>
+	</select>	
+
+	       
+	
+	
+    
+	<insert id="anymock.TemplateSystem.insert">
+		<![CDATA[
+				insert into anymock_template_system(
+				 innerid,
+					communication_id,
+					sys_template,
+					macthdescription,
+          gmt_create,
+          gmt_modified
+				) values (#innerid#, #communicationId#,#sysTemplate#,#macthdescription#,sysdate(),sysdate())
+        	]]>
+		<selectKey resultClass="java.lang.String" type="post" keyProperty="innerid" >
+            select last_insert_id()
+    	</selectKey>        
+	</insert>
+	
+	<select id="anymock.TemplateSystem.selectByUrlId" resultMap="RM.TemplateSystem" >
+    	<![CDATA[
+				select
+ /*anymock.TemplateSystem.selectByUrlId*/ 				  innerid,
+					communication_id,
+					sys_template,
+					macthdescription,
+          gmt_create,
+          gmt_modified
+				from anymock_template_system
+				where communication_id = #communicationId#
+			]]>
+	</select>	
+
+	    
+	
+	
+    
+	
+	<select id="anymock.TemplateSystem.selectById" resultMap="RM.TemplateSystem" >
+    	<![CDATA[
+				select
+ /*anymock.TemplateSystem.selectById*/ 				  innerid,
+					communication_id,
+					sys_template,
+					macthdescription,
+          gmt_create,
+          gmt_modified
+				from anymock_template_system
+				where innerid = #innerid#
+			]]>
+	</select>	
+
+	    
+	
+	
+    
+	
+	<update id="anymock.TemplateSystem.updateTemplate">
+		<![CDATA[
+				update  anymock_template_system set
+					sys_template =#sysTemplate#,
+					gmt_modified =sysdate()
+				where innerid =#innerid#
+			]]>
+	</update>
+	
+    
+	
+	<update id="anymock.TemplateSystem.updateMacth">
+		<![CDATA[
+				update  anymock_template_system set
+					macthdescription =#macthdescription#,
+					gmt_modified =sysdate()
+				where innerid =#innerid#
+			]]>
+	</update>
+	
+    
+	
+	
+	<delete id="anymock.TemplateSystem.deleteById">
+		<![CDATA[
+				delete from  anymock_template_system
+				where innerid = #innerid#
+    		]]>
+    </delete>
+    
+
+</sqlMap>
+

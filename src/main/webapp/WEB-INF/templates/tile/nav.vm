@@ -1,0 +1,83 @@
+
+<div class="mi-nav">
+    <div class="mi-nav-container">
+        <ul id="J_navMenuListUL" class="mi-nav-content">
+            ##  mi-nav-item-current
+            <li class="mi-nav-item">
+                <a class="mi-nav-item-child" href="/homePage.htm" target="_self">
+                    <strong>我的首页</strong>
+                </a>
+            </li>
+            <li class="mi-nav-item">
+                <a class="mi-nav-item-child" href="/addPageShow.htm" target="_self">
+                    <strong>复制配置</strong>
+                </a>
+            </li>
+            <li class="mi-nav-item">
+                <a class="mi-nav-item-child" href="" target="_self">
+                    <strong>服务配置</strong>
+                </a>
+                <ul class="mi-nav-child">
+                    <li class="mi-nav-item">
+                        <a class="mi-nav-item-child" href="/setUpAnymockConifg.htm" target="_self">
+                            <span>添加普通服务</span>
+                        </a>
+                    </li>
+                     <li class="mi-nav-item">
+                        <a class="mi-nav-item-child" href="/setUpTransferConifg.htm" target="_self">
+                            <span>添加转发服务</span>
+                        </a>
+                    </li>
+                    <li class="mi-nav-item">
+                        <a class="mi-nav-item-child" href="/maintainConfig.htm?type=merge" target="_self">
+                            <span>合并配置</span>
+                        </a>
+                    </li>
+                    <li class="mi-nav-item">
+                        <a class="mi-nav-item-child" href="/maintainConfig.htm?type=commu" target="_self">
+                            <span>配置维护</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="mi-nav-item">
+                <a class="mi-nav-item-child" href="" target="_self">
+                    <strong>缓存刷新</strong>
+                </a>
+                <ul class="mi-nav-child">     
+                    <li class="mi-nav-item">
+                        <a class="mi-nav-item-child" id="allCache" href="" target="_self">
+                            <span>刷新全部</span>
+                        </a>
+                    </li>
+                    <li class="mi-nav-item">
+                        <a class="mi-nav-item-child" id="systemCache"  href="" target="_self">
+                            <span>刷新公共</span>
+                        </a>
+                        </li>
+                    <li class="mi-nav-item">
+                        <a class="mi-nav-item-child" id="userCache"  href="" target="_self">
+                            <span>刷新用户</span>
+                        </a>
+                    </li>
+                    <li class="mi-nav-item">
+                        <a class="mi-nav-item-child" id="commuCache"  href="" target="_self">
+                            <span>刷新通讯</span>
+                        </a>
+                    </li>
+                    <li class="mi-nav-item">
+                        <a class="mi-nav-item-child" id="addUserCache"   href="" target="_self">
+                            <span>刷新用户公共</span>
+                        </a>
+                    </li>
+                </ul>            
+            </li>
+            <li class="mi-nav-item">
+                <a class="mi-nav-item-child" href="/anymockHelp.htm" target="_self">
+                    <strong>帮助中心</strong>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

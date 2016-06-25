@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+
+    
+    <resultMap id="RM.TemplateDetail" class="com.mock.common.dal.dataobject.TemplateDetailDO">
+		<result property="id" column="ID" javaType="long" jdbcType="BIGINT"  nullValue="0"  />
+		<result property="innerid" column="INNERID" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="detailValue" column="DETAIL_VALUE" javaType="java.lang.String" jdbcType="LONGVARCHAR"  />
+		<result property="detailSequence" column="DETAIL_SEQUENCE" javaType="int" jdbcType="INTEGER"  nullValue="0"  />
+		<result property="gmtCreate" column="GMT_CREATE" javaType="java.util.Date" jdbcType="TIMESTAMP"  />
+		<result property="gmtModified" column="GMT_MODIFIED" javaType="java.util.Date" jdbcType="TIMESTAMP"  />
+    </resultMap>
+    
+
+	
+	<select id="anymock.TemplateDetail.loadAll" resultMap="RM.TemplateDetail" >
+    	<![CDATA[
+				select
+ /*anymock.TemplateDetail.loadAll*/ 					id,
+					innerid,
+          detail_value,
+          detail_sequence,
+          gmt_create,
+          gmt_modified
+				from anymock_template_detail
+			]]>
+	</select>	
+
+	    
+	
+	
+    
+	
+	<select id="anymock.TemplateDetail.selectByInnerId" resultMap="RM.TemplateDetail" >
+    	<![CDATA[
+				select
+ /*anymock.TemplateDetail.selectByInnerId*/ 					id,
+					innerid,
+          detail_value,
+          detail_sequence,
+         gmt_create,
+          gmt_modified                    
+				from anymock_template_detail
+				where innerid=#innerid#
+				order by detail_sequence
+			]]>
+	</select>	
+
+	    
+	
+	
+    
+	
+	<select id="anymock.TemplateDetail.selectDetailById" resultMap="RM.TemplateDetail" >
+    	<![CDATA[
+				select
+ /*anymock.TemplateDetail.selectDetailById*/ 					id,
+					innerid,
+          detail_value,
+          detail_sequence,
+          gmt_create,
+          gmt_modified
+			  from anymock_template_detail
+			  where id = #id#
+			]]>
+	</select>	
+
+	    
+	
+	
+    
+	
+	
+    
+	<insert id="anymock.TemplateDetail.insert">
+		<![CDATA[
+				insert into anymock_template_detail
+				   (
+				   innerid,
+				   detail_value,
+				   detail_sequence,
+				   gmt_create,
+				   gmt_modified)
+				values (#innerid#,#detailValue#,#detailSequence#,sysdate(),sysdate())
+			]]>
+		<selectKey resultClass="long" type="post" keyProperty="id" >
+            select last_insert_id()
+    	</selectKey>        
+	</insert>
+	
+	
+	<delete id="anymock.TemplateDetail.deleteByID">
+		<![CDATA[
+				delete from  anymock_template_detail
+				where id = #id#
+    		]]>
+    </delete>
+    
+	
+	
+	<delete id="anymock.TemplateDetail.deleteAllByInnerid">
+		<![CDATA[
+				delete from  anymock_template_detail
+				where innerid = #innerid#
+    		]]>
+    </delete>
+    
+	
+	<update id="anymock.TemplateDetail.updateByID">
+		<![CDATA[
+				update  anymock_template_detail set 					
+					detail_value =#detailValue#,
+					gmt_modified =sysdate()
+				where id =#id#
+			]]>
+	</update>
+	
+    
+	
+	<update id="anymock.TemplateDetail.updateSequence">
+		<![CDATA[
+				update  anymock_template_detail set 					
+					detail_sequence =#detailSequence#,
+					gmt_modified =sysdate()
+				where id =#id#
+			]]>
+	</update>
+	
+    
+
+</sqlMap>
+

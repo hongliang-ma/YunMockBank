@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig 
+PUBLIC "-//iBATIS.apache.org//DTD SQL Map Config 2.0//EN" 
+"http://iBATIS.apache.org/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<settings cacheModelsEnabled="true" enhancementEnabled="true"
+		lazyLoadingEnabled="false" maxRequests="3000" maxSessions="3000"
+		maxTransactions="3000" useStatementNamespaces="false" />
+
+	<!-- 使用spring之后，数据源的配置移植到了spring上，所以iBATIS本身的配置可以取消 -->
+
+	<sqlMap resource="sqlmap/User-sqlmap-mapping.xml"/>
+	<!--<sqlMap resource="sqlmap/Communication-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/Lable-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/TemplateDetail-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/TemplateSystem-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/TemplateUser-sqlmap-mapping.xml"/>
+	
+	
+--></sqlMapConfig>

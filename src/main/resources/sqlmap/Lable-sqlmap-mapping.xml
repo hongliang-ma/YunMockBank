@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+
+    
+    <resultMap id="RM.Lable" class="com.mock.common.dal.dataobject.LableDO">
+		<result property="communicationId" column="COMMUNICATION_ID" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="lableName" column="LABLE_NAME" javaType="java.lang.String" jdbcType="VARCHAR"  />
+    </resultMap>
+    
+
+	
+	
+    
+	<insert id="anymock.Lable.insert">
+		<![CDATA[
+				insert into anymock_lable
+				   (
+				   communication_id,
+				   lable_name)
+				values
+				(#communicationId#,#lableName#)
+			]]>
+		<selectKey resultClass="java.lang.String" type="post" keyProperty="communicationId" >
+            select last_insert_id()
+    	</selectKey>        
+	</insert>
+	
+	<select id="anymock.Lable.loadAll" resultMap="RM.Lable" >
+    	<![CDATA[
+				select
+ /*anymock.Lable.loadAll*/ 						communication_id,
+				    lable_name
+				from anymock_lable
+			]]>
+	</select>	
+
+	    
+	
+	
+    
+	
+	<update id="anymock.Lable.updateLable">
+		<![CDATA[
+				update  anymock_lable set
+					lable_name =#lableName#
+				where communication_id =#communicationId#
+			]]>
+	</update>
+	
+    
+	
+	
+	<delete id="anymock.Lable.deleteByCommuId">
+		<![CDATA[
+				delete from  anymock_lable
+				where communication_id = #communicationId#
+    		]]>
+    </delete>
+    
+
+</sqlMap>
+

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+
+    
+    <resultMap id="RM.Communication" class="com.mock.common.dal.dataobject.CommunicationDO">
+		<result property="id" column="ID" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="connectType" column="CONNECT_TYPE" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="istransfer" column="ISTRANSFER" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="protocolType" column="PROTOCOL_TYPE" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="charset" column="CHARSET" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="uri" column="URI" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="recvDataType" column="RECV_DATA_TYPE" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="sendDataType" column="SEND_DATA_TYPE" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="properties" column="PROPERTIES" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="description" column="DESCRIPTION" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="maxCounter" column="MAX_COUNTER" javaType="int" jdbcType="INTEGER"  nullValue="0"  />
+		<result property="gmCreated" column="GM_CREATED" javaType="java.util.Date" jdbcType="TIMESTAMP"  />
+		<result property="gmModified" column="GM_MODIFIED" javaType="java.util.Date" jdbcType="TIMESTAMP"  />
+    </resultMap>
+    
+
+	
+	<select id="anymock.Communication.loadAll" resultMap="RM.Communication" >
+    	<![CDATA[
+				select
+ /*anymock.Communication.loadAll*/ 				  id,
+				  connect_type,
+				  istransfer,
+				  protocol_type,
+				  charset,
+				  uri,
+				  description,
+				  recv_data_type,
+				  send_data_type,
+				  properties,
+				  max_counter,
+				  gm_created,
+				  gm_modified
+				from
+				  anymock_communication
+			]]>
+	</select>	
+
+	    
+	
+	
+    
+	
+	
+    
+	<insert id="anymock.Communication.insert">
+		<![CDATA[
+				insert into anymock_communication(
+				  id,
+				  connect_type,
+				  istransfer,
+				  protocol_type,
+				  charset,
+				  uri,
+				  description,
+				  recv_data_type,
+				  send_data_type,
+				  properties,
+				  max_counter,
+				  gm_created,
+				  gm_modified
+				) values (#id#,#connectType#,#istransfer#,#protocolType#,#charset#,#uri#,#description#,#recvDataType#,#sendDataType#,#properties#,#maxCounter#,sysdate(),sysdate())
+        	]]>
+		<selectKey resultClass="java.lang.String" type="post" keyProperty="id" >
+            select last_insert_id()
+    	</selectKey>        
+	</insert>
+	
+	<select id="anymock.Communication.selectById" resultMap="RM.Communication" >
+    	<![CDATA[
+				select
+ /*anymock.Communication.selectById*/ 				  id,
+				  connect_type,
+				  istransfer,
+				  protocol_type,
+				  charset,
+				  uri,
+				  description,
+				  recv_data_type,
+				  send_data_type,
+				  properties,
+				  max_counter,
+				  gm_created,
+				  gm_modified
+				from
+				  anymock_communication
+			  where id = #id#
+			]]>
+	</select>	
+
+	    
+	
+	
+    
+	
+	<select id="anymock.Communication.selectByMutiUrl" resultClass="String" >
+    	<![CDATA[
+				select
+ /*anymock.Communication.selectByMutiUrl*/ 				  id
+				from
+				  anymock_communication
+			  where uri = #uri#
+			]]>
+	</select>	
+
+	    
+	
+	
+    
+	
+	<select id="anymock.Communication.selectByUrl" resultClass="String" >
+    	<![CDATA[
+				select
+ /*anymock.Communication.selectByUrl*/ 				  id
+				from
+				  anymock_communication
+			  where uri = #uri# and
+			  connect_type = #connectType#
+			]]>
+	</select>	
+
+	    
+	
+	
+    
+	
+	
+	<delete id="anymock.Communication.deleteByID">
+		<![CDATA[
+				delete from  anymock_communication
+				where id = #id#
+    		]]>
+    </delete>
+    
+	
+	<update id="anymock.Communication.updateByID">
+		<![CDATA[
+				update  anymock_communication set 					
+				  connect_type=#connectType#,
+				  istransfer=#istransfer#,
+				  protocol_type=#protocolType#,
+				  charset=#charset#,
+				  uri=#uri#,				  
+				  recv_data_type=#recvDataType#,
+				  send_data_type=#sendDataType#,
+				  properties=#properties#,
+				  description=#description#,
+				  max_counter=#maxCounter#,
+				 gm_modified =sysdate()
+				where id =#id#
+			]]>
+	</update>
+	
+    
+	
+	<update id="anymock.Communication.updateConnectType">
+		<![CDATA[
+				update  anymock_communication set
+					connect_type =#connectType#,
+					gm_modified =sysdate()
+				where id =#id#
+			]]>
+	</update>
+	
+    
+	
+	<update id="anymock.Communication.updateIstransfer">
+		<![CDATA[
+				update  anymock_communication set
+					istransfer =#istransfer#,
+					gm_modified =sysdate()
+				where id =#id#
+			]]>
+	</update>
+	
+    
+	
+	<update id="anymock.Communication.updateUri">
+		<![CDATA[
+				update  anymock_communication set
+					uri =#uri#,
+					gm_modified =sysdate()
+				where id =#id#
+			]]>
+	</update>
+	
+    
+	
+	<update id="anymock.Communication.updateProperties">
+		<![CDATA[
+				update  anymock_communication set
+					properties =#properties#,
+					gm_modified =sysdate()
+				where id =#id#
+			]]>
+	</update>
+	
+    
+
+</sqlMap>
+

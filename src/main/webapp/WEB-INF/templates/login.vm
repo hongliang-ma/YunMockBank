@@ -1,0 +1,25 @@
+#set($layout="layout/logindefault.vm")
+
+
+    <div class="passport-main">
+        <div class="brand-pic">
+            <div style="width:900px;height:300px;border:none;padding:0px;margin:0px;overflow:hidden;">
+                    <img style="width:600px;height:300px;border:none; text-align:center;" src="images/login-middle.jpg">
+                </a>
+            </div>
+        </div>
+        <div class="loginer clearfix">
+            <form class="registerform" autocomplete="true" method="post" name="passport" action="login.do">
+                <div class="username">
+                    <input  class="passport-input i_username" id="login_name" type="text" placeholder="用户名" value=""  autofocus required title="输入用户名和密码,完成注册"/> 
+                </div>
+                <div class="password">
+                    <input class="passport-input i_password"  id="login_password" type="password" placeholder="密码" value=""  required/> 
+                </div>
+                <div class="register-btn">
+                    <input class="submit-btn" type="submit" value="" id="login_bt"/>
+                </div>
+            </form>             
+        </div>
+    </div>
+    <div></div>

@@ -1,0 +1,622 @@
+##用来展示第一部分
+#macro(userInfo_head $innerid  $templateName  $matchstr $countUser $bEdit $isServer $runMode)
+    <div id="userInfo_head_name">
+        <form id="userInfo_head_nameform" action="changeDetail.htm?action=headChangeName" method="post">
+            <input class="innerid" type="hidden" name="innerid" value="$innerid"/>
+            配置名字:<input type="text" class="edit_input"  size="30" name="templateName" value="$templateName" />
+            #if($bEdit == true)
+                    <input class="submit_bt" type="submit" name="conformValue" value="提交"/>
+                    <input class="cancel_bt" type="button" name="changeValue" value="取消"/>
+            #end
+            <p>使用次数:$countUser</p>
+        </form>
+    </div>
+    #if($isServer == true  && $runMode == "NORMAL")
+    <div id="userInfo_head_matchstr">
+        <form id="userInfo_head_matchstrform" action="changeDetail.htm?action=changeMatchstr" method="post">
+            <input class="innerid" type="hidden" name="innerid" value="$innerid"/>             
+            唯一值:<input type="text" class="edit_input showTips"  size="30" name="matchstr" value="$matchstr"  title="多个唯一值之间用||隔开，最多3个，每个值对应一个唯一值规则,例如aa||bb||bb" />
+            #if($bEdit == true)
+                    <input class="submit_bt" type="submit" name="conformValue" value="提交"/>
+                    <input class="cancel_bt" type="button" name="changeValue" value="取消"/>
+            #end
+        </form>
+    </div>
+    #end
+#end
+##匹配规则修改
+#macro(userInfo_Macth $sysId $codeRule  $codeRuleT $codeRuleS $matchDescrption $bEdit)
+    <div class="userInfo_head_matchWay">
+    	 <a href="#"  rel="#head_matchway" class="mi-button mi-button-lblue overlay_bt">
+            <span class="mi-button-text">唯一性取值设置，最多支持3个唯一值规则的设置</span>
+        </a>
+        <div id="head_matchway" class="simple_overlay fn-hide">
+        <form class="userInfo_head_atchwayform" action="changeDetail.htm?action=changeMacthWay" method="post">
+            <input class="sysId" type="hidden" name="sysId" value="$sysId"/>
+            唯一值取值规则1:<textarea cols="60"  class="edit_input  editTextarea" name="codeRule"  >$!codeRule</textarea><br/>
+            唯一值取值规则2:<textarea cols="60"  class="edit_input  editTextarea" name="codeRuleT"  >$!codeRuleT</textarea><br/>
+            唯一值取值规则3:<textarea cols="60"  class="edit_input  editTextarea" name="codeRuleS"  >$!codeRuleS</textarea><br/>
+            #if($bEdit == true)               
+                    <input class="submit_bt" type="submit" name="conformValue" value="提交"/>
+                    <input class="cancel_bt" type="button" name="changeValue" value="取消"/>
+            #end
+        </form>
+        </div>
+    </div>
+    <div class="userInfo_head_descrption">
+        <form class="userInfo_head_descrption" action="changeDetail.htm?action=changeMacthDes" method="post">
+            <input class="sysId" type="hidden" name="sysId" value="$sysId"/>
+           唯一标识取值方式描述: <input type="text" class="edit_input"  size="30" name="macthDes" value="$matchDescrption" />
+            #if($bEdit == true)
+                    <input class="submit_bt" type="submit" name="conformValue" value="提交"/>
+                    <input class="cancel_bt" type="button" name="changeValue" value="取消"/>
+            #end
+        </form>
+    </div>
+#end
+##如果是服务器，这显示报文，否则需要输入coderule
+#macro(sendMsg $isServer $callUrl $reqType $charset  $innerid $type)
+    <div class="msgSendDiv">
+        <a href="#"  rel="#$type$isServer" class="mi-button mi-button-lblue overlay_bt">
+            <span class="mi-button-text">报文仿真</span>
+        </a>
+        <div id="$type$isServer" class="simple_overlay fn-hide">
+            #set($end=$callUrl.length() - 1)        
+            #set($lastend =  $end + 1)
+            #if($callUrl.toLowerCase().contains("http"))
+            	#if($callUrl.contains("https"))
+                #set($start = $callUrl.indexOf("/", 8))
+                #else
+                #set($start = $callUrl.indexOf("/", 7))
+                #end
+                #set($newNum = $start + 1)
+                #set($sendUrl = $callUrl.substring($newNum,$lastend))
+                #elseif($callUrl.toLowerCase().contains("tcp"))
+                    #set($fromstat = $callUrl.lastIndexOf(":") + 1)
+                    #set($sendUrl = "anymockTcpSendMsg.htm?sendPort="+$callUrl.substring($fromstat,$lastend))
+            #end
+            #if($isServer == true)        
+                <form class="sendMsgTest">
+                    <input  class="sendTestUrl" type="hidden" name="sendUrl" value="$!sendUrl"/>
+                    <input class="sendType" type="hidden" name="sendType" value="$!reqType"/>
+                    <input  class="charsetSet" type="hidden" name="charset" value="$!charset"/>
+                    <p>通讯地址:$callUrl</p>
+                    发送报文:<textarea cols="80" class="send_input  editTextarea" name="sendmsg"></textarea>
+                    <input class="submit_sendbt" type="submit"  value="发送消息"/>
+                </form>
+                #else
+                    <form class="clientMsgTest" action="anymockTestCallSend.htm?transferId=$innerid" method="post">
+                        <p>通讯地址:$callUrl</p>
+                        设置发送码:<input class="send_input" type="text " name="transCodeRule" value=""/>
+                        <input class="submit_sendbt" type="submit" value="发送消息"/>
+                    </form>
+            #end    
+            返回报文:<textarea cols="80" class="return_Msg  editTextarea" name="sendmsg"></textarea>
+        </div>
+    </div>
+<div class="miy-line-dot"></div>
+#end
+##显示详情
+#macro(showDetail $templateDetailList $isServer $bEdit $innerid)    
+    ##assert组件
+    <a href="#" class="mi-button mi-button-lblue addAssert" value="$innerid">
+  <span class="mi-button-text">添加assert工具</span>
+    </a>
+    #foreach( $TemplateDetail in $templateDetailList)
+        #if ($TemplateDetail)
+            #set($detailMsg_ID = $TemplateDetail.id)
+            #set($detailMsg = $TemplateDetail.getDetailValue())
+            #set($detailMsg_CID = $detailMsg.classid)
+            #if ($detailMsg_CID == "KeyValueParse" || $detailMsg_CID == "XMLParse" || $detailMsg_CID == "SerialParse"  || $detailMsg_CID == "MessageParser"  || $detailMsg_CID == "CallBackMessageParser")
+                <div class="userInfo_splite"/>
+                #buildMoreKeyValueForm($detailMsg_ID $detailMsg $detailMsg_CID $isServer $bEdit)
+                #elseif($detailMsg_CID == "MessageBuild" || $detailMsg_CID == "CallBackMessageBuild" || $detailMsg_CID == "DESMacAdaptor" || $detailMsg_CID == "XMLToMapping")
+                    #else
+                        <div class="userInfo_splite"/>
+                        #buildNormalForm($detailMsg_ID $detailMsg $detailMsg_CID $bEdit)
+            #end
+        #end        
+    #end
+#end
+##显示尾部
+#macro(userInfo_tail  $innerid $transferId $isdefault  $runMode $bEdit)
+    <div id ="userInfo_tail">
+        #if($bEdit == true)
+		            #if($isdefault == false)
+		                <input id="userInfo_tail_default" type="button" value="设置为默认值!" onclick="setDefault('$innerid', 'true')">
+		             #else 
+		             <input id="userInfo_tail_default" type="button" value="取消为默认值!" onclick="setDefault('$innerid', 'false')">           
+		            #end
+		            <input id="userInfo_tail_delete" type="button" value="删除该配置!" onclick="delConfig('$innerid', '$!transferId')">
+                     #if($runMode != "PERFORM")
+                     <input id="userInfo_tail_Perform" type="button" value="设置为性能模式" onclick="setPerform('$innerid', 'true')">
+                     #else
+                     <input id="userInfo_tail_Perform" type="button" value="取消为性能模式" onclick="setPerform('$innerid', 'false')">
+                     #end		            
+         #else
+                     #if($runMode == "NORMAL")
+		             <input id="userInfo_tail_Copy" type="button" value="新增为我的配置" onclick="addNewConfig('$innerid', '$!transferId')">
+                    #end
+            #end
+</div>
+#end
+##普通的模板配置
+#macro(buildNormalForm $detailMsg_ID $detailMsg $detailMsg_CID $bEdit)
+    <div class="detailTools_normal_title">
+        <form class="detailTools_normal" action="changeDetail.htm?action=normalChange&id=$detailMsg_ID" method="post">
+            <span class="showTitle">$detailMsg.cname</span>
+            #set($detailMsgMap = $detailMsg.getKeyValues())
+            #if($detailMsg_CID == "AssertAdaptor")
+                #AssertAdaptorBuild($detailMsgMap)
+            #elseif($detailMsg_CID == "LengthCodeRule")
+                #LengthCodeRuleBuild($detailMsgMap)
+                #elseif($detailMsg_CID == "BuildLengthAdaptor")            
+                    #BuildLengthAdaptorBuild($detailMsgMap)      
+                    #elseif($detailMsg_CID == "CodeRule")
+                        #CodeRuleBuild($detailMsgMap) 
+                        #elseif($detailMsg_CID == "MoenyConvert")
+                            #MoenyConvertBuild($detailMsgMap)
+                            #elseif($detailMsg_CID == "StringSubAdaptor")
+                                #StringSubAdaptorBuild($detailMsgMap)
+                                    #elseif($detailMsg_CID == "XMLSubAdaptor")                           
+                                        #XMLSubAdaptorBuild($detailMsgMap)
+                                        #elseif($detailMsg_CID == "MappingValueAction")
+                                            #MappingValueActionBuild($detailMsgMap)
+                                            #elseif($detailMsg_CID == "DESSH1Signer")
+                                                #DESSH1SignerBuild($detailMsgMap)
+                                                #elseif($detailMsg_CID == "DelayAction")
+                                                    #DelayActionBuild($detailMsgMap)
+                                                    #elseif($detailMsg_CID == "LoggerToDataAdaptor")
+                                                        #LoggerToDataAdaptorBuild($detailMsgMap)
+                                                        #elseif($detailMsg_CID == "DBConnectionAdaptor")
+                                                            #DBConnectionAdaptorBuild($detailMsgMap)
+                                                            #elseif($detailMsg_CID == "FileReaderAdaptor")
+                                                                #FileReaderAdaptorBuild($detailMsgMap)
+                                                                #elseif($detailMsg_CID == "FileUploadAdaptor")
+                                                                    #FileUploadAdaptorBuild($detailMsgMap)
+                                                                    #elseif($detailMsg_CID == "KTFileUploadAdaptor")
+                                                                        #KTFileUploadAdaptorBuild($detailMsgMap)
+                                                                        #elseif($detailMsg_CID == "Decoder")                
+                                                                            #DecoderBuild($detailMsgMap)
+                                                                                #elseif($detailMsg_CID == "MD5Signer")
+                                                                                    #MD5SignerBuild($detailMsgMap)
+                                                                                    #elseif($detailMsg_CID == "MsgLengthParse" || $detailMsg_CID == "MsgLengthBuild")
+                                                                                        #MsgLengthParseBuild($detailMsgMap)
+            #end
+            #if($bEdit == true)
+                    <input class="submit_bt" type="submit" name="conformValue" value="提交"/>
+                    <input class="cancel_bt" type="button" name="changeValue" value="取消"/>
+            #end
+        </form>
+		#if($detailMsg_CID == "FileUploadAdaptor" || $detailMsg_CID == "KTFileUploadAdaptor")
+		<div id="fileUpload" class="simple_overlay fn-hide">
+	      <form id="uploadForm" method="post" action="/fileUploadPage.htm" enctype="multipart/form-data">
+			文件上传：
+					<input type="hidden" name="action" value="upload"/>
+					<input type="hidden" name="detailId" value="$detailMsg_ID"/>
+					<input type="file" name="file" id="file"/>
+					<input type="submit" value="上传"/>
+		  </form>
+		</div>
+		#end
+    </div>
+<div class="miy-line-dot"></div>
+#end
+##含有template的配置
+#macro(buildMoreKeyValueForm $detailMsg_ID $detailMsg $detailMsg_CID $isServer $bEdit)
+    <div class="morkey_head">
+        <span class="showTitle">$detailMsg.cname</span>
+        <form class="detailTools_MoreKeyValue_head" action="changeDetail.htm?action=normalChange&id=$detailMsg_ID" method="post">
+            #set($detailMsgMap = $detailMsg.getKeyValues())
+            #if($detailMsg_CID == "KeyValueParse")
+                #KeyValueParseBuild($detailMsgMap)
+                #elseif($detailMsg_CID == "SerialParse")
+                    #SerialParseBuild($detailMsgMap)
+                    #elseif($detailMsg_CID == "XMLParse")
+                        #XMLParseBuild($detailMsgMap)
+                        #elseif($detailMsg_CID == "MessageParser" || $detailMsg_CID == "CallBackMessageParser")
+                            #MessageParserBuild($detailMsgMap)
+            #end
+            #if($bEdit == true)
+                    <input class="submit_bt" type="submit" name="conformValue" value="提交"/>
+                    <input class="cancel_bt" type="button" name="changeValue" value="取消"/>
+            #end
+        </form>
+    </div>
+    #if($detailMsg.getTemplateMsg() && $detailMsg.getTemplateMsg().get("template"))
+    	 #set($detailMsgTemplate = $detailMsg.getTemplateMsg().get("template"))
+    	 #if($detailMsg_CID == "KeyValueParse" || $detailMsg_CID == "SerialParse" || $detailMsg_CID == "XMLParse")
+        <a href="#"  rel="#$detailMsg_CID$isServer" class="mi-button mi-button-lblue overlay_bt">
+            <span class="mi-button-text">返回报文配置</span>
+        </a>
+        <div id="$detailMsg_CID$isServer" class="simple_overlay fn-hide">
+            <form class="detailTools_MoreKeyValue">
+                <input class="keyValueUrl" type="hidden" name="keyValueUrl" value="changeDetail.htm?action=changeTemplate&id=$detailMsg_ID&"/>
+                          #normalTemplate($detailMsgTemplate $bEdit)
+                #if($bEdit == true)
+                        <input class="more_submit_bt" type="submit" name="conformValue" value="提交"/>
+                        <input class="more_cancel_bt" type="button" name="changeValue" value="取消"/>
+                #end
+            </form>
+        </div>
+          #elseif($detailMsg_CID == "MessageParser" ||  $detailMsg_CID ==  "CallBackMessageParser")
+                        #MessageParserTemplate($detailMsg_ID $detailMsgTemplate)
+           #end
+<div class="miy-line-dot"></div>
+    #end
+#end
+#macro(LengthCodeRuleBuild $detailMsgMap)
+    定长截取长度 :<input class="edit_input" type="text" name="codeRule" value="$!detailMsgMap.get('codeRule')" />
+#end
+#macro(BuildLengthAdaptorBuild $detailMsgMap)
+    报文长度 :<input class="edit_input" type="text" name="Msglength" value="$!detailMsgMap.get('Msglength')"  />
+    报文长度填充符:<input class="edit_input" type="text" name="MsgType" value="$!detailMsgMap.get('MsgType')"  />
+#end
+#macro(CodeRuleBuild $detailMsgMap)
+    协议码规则:<input class="edit_input" type="text" name="codeRule" value="$detailMsgMap.get('codeRule')"  />
+    消息类型:
+    <select class="edit_input" name="state"  >
+        #set($editvalue = $detailMsgMap.get('state'))
+            <option value="XML"  #if($editvalue == "XML") selected="selected" #end>XML报文</option>
+            <option value="FIXED" #if($editvalue == "FIXED") selected="selected" #end>定长报文</option>
+            <option value="KEYVALUE" #if($editvalue == "KEYVALUE") selected="selected" #end>键值对报文</option>
+            <option value="XMLMAX" #if($editvalue == "XMLMAX") selected="selected" #end>键值对XML混合报</option>
+            <option value="REGULAR" #if($editvalue == "REGULAR") selected="selected" #end>正则表达式</option>
+            <option value="IS8583" #if($editvalue == "IS8583") selected="selected" #end>标准8583</option>
+    </select>
+</br>
+#if($detailMsgMap.get('callflag'))
+    同异步判断:
+    <select class="edit_input" name="callflag"  >
+        #set($editvalue = $detailMsgMap.get('callflag'))
+            <option value="true" #if($editvalue == "true") selected="selected" #end>异步调用</option>
+            <option value="false" #if($editvalue == "false") selected="selected" #end>同步调用</option>
+    </select>
+#end
+#if($editvalue == "KEYVALUE" || $editvalue == "XMLMAX" )
+键值对分隔符:<input class="edit_input" type="text" name="splite" value="$!detailMsgMap.get('splite')" title="默认为&，可以设置为NULL或则空"  />	
+#end
+#if($detailMsgMap.get('isbinary'))
+    是否采用二进制:
+    <select class="edit_input" name="isbinary"  >
+        #set($editvalue = $detailMsgMap.get('isbinary'))
+            <option value="true" #if($editvalue == "true") selected="selected" #end>是</option>
+            <option value="false" #if($editvalue == "false") selected="selected" #end>否</option>
+    </select>
+</br>
+#end
+#if($detailMsgMap.get('tpdu'))
+    tpdu字段:<input class="edit_input" type="text" name="tpdu" value="$detailMsgMap.get('tpdu')"  />
+#end
+#if($detailMsgMap.get('typelength'))
+    MTI长度:<input class="edit_input" type="text" name="typelength" value="$detailMsgMap.get('typelength')"  />
+</br>
+#end
+#if($detailMsgMap.get('mtitype'))
+    MTI编码格式:
+     <select class="edit_input" name="mtitype"  >
+        #set($editvalue = $detailMsgMap.get('mtitype'))
+            <option value="BCD" #if($editvalue == "BCD") selected="selected" #end>BCD编码</option>
+            <option value="ASCII" #if($editvalue == "ASCII") selected="selected" #end>ASCII编码</option>
+    </select>
+#end
+#if($detailMsgMap.get('strbitset'))
+    MTI位设置:
+     BitMap的编码格式:
+     <select class="edit_input" name="strbitset"  >
+        #set($editvalue = $detailMsgMap.get('strbitset'))
+            <option value="Binary_64" #if($editvalue == "Binary_64") selected="selected" #end>Binary_64</option>
+            <option value="Binary_128"  #if($editvalue == "Binary_128") selected="selected" #end>Binary_128</option>
+            <option value="Hex_64" #if($editvalue == "Hex_64") selected="selected" #end>Hex_64</option>
+            <option value="Hex_128" #if($editvalue == "Hex_128") selected="selected" #end>Hex_128</option>
+    </select>
+#end
+#end
+#macro(MoenyConvertBuild $detailMsgMap)
+    请求方式:
+    <select class="edit_input" name="reqType"  >
+        #set($editvalue =$detailMsgMap.get('reqType'))
+            <option value="parameter" #if($editvalue == "parameter") selected="selected" #end>键值对报文</option>
+            <option value="content" #if($editvalue == "content") selected="selected" #end>普通文本报文</option>
+            <option value="contentparameter" #if($editvalue == "contentparameter") selected="selected" #end>键值对文本报文</option>
+    </select>
+#end
+#macro(StringSubAdaptorBuild $detailMsgMap)
+    字符串截取规则:<input class="edit_input" type="text" name="codeRule" value="$detailMsgMap.get('codeRule')"  />
+    字符串截取类型 :
+    <select class="edit_input" name="state"  >
+        #set($editvalue =$detailMsgMap.get('state'))
+            <option value="1" #if($editvalue == "1") selected="selected" #end>从左边开始截取</option>
+            <option value="2" #if($editvalue == "2") selected="selected" #end>从右边开始截取</option>
+            <option value="3" #if($editvalue == "3") selected="selected" #end>截取指定字符串</option>
+    </select>
+</br>
+消息类型:
+<select class="edit_input" name="isRule"  >
+    #set($editvalue =$detailMsgMap.get('isRule'))
+        <option value="true" #if($editvalue == "true") selected="selected" #end>按照协议码规则截取</option>
+        <option value="false" #if($editvalue == "false") selected="selected" #end>按照指定字符串截取</option>
+</select>
+#end
+#macro(XMLSubAdaptorBuild $detailMsgMap)                 
+    父截取规则:<input class="edit_input" type="text" name="codeRule" value="$!detailMsgMap.get('codeRule')"  />
+    子截取规则 :<input class="edit_input" type="text" name="subRule" value="$!detailMsgMap.get('subRule')"   />
+</br>
+分割符:<input class="edit_input" type="text" name="split" value="$!detailMsgMap.get('split')"  />
+#end
+#macro(MappingValueActionBuild $detailMsgMap)
+	#set($editvalue = $detailMsgMap.get('state'))
+    消息类型 :
+    <select class="edit_input" name="state"  >
+            <option value="XML" #if($editvalue == "XML") selected="selected" #end>XML报文</option>
+            <option value="KEYVALUE" #if($editvalue == "KEYVALUE") selected="selected" #end>键值对报文</option>
+            <option value="XMLMAX" #if($editvalue == "XMLMAX") selected="selected" #end>键值对XML混合报</option>
+    </select>
+#if($editvalue == 'KEYVALUE')
+	关键取字 :<input class="edit_input" type="text" name="key" value="$!detailMsgMap.get('key')"  />
+#elseif($editvalue == 'XMLMAX')
+协议码:<input class="edit_input" type="text" name="codeRule" value="$!detailMsgMap.get('codeRule')"  />
+#end
+#end
+#macro(DelayActionBuild $detailMsgMap)
+    超时时间:<input class="edit_input" type="text" name="delay" value="$!detailMsgMap.get('delay')"  />
+    毫秒
+#end
+#macro(LoggerToDataAdaptorBuild $detailMsgMap)                   
+    日志文件路径:<input class="edit_input" type="text" name="directory" value="$!detailMsgMap.get('directory')"  />
+    消息传递类型:
+    <select class="edit_input" name="msgType" >
+        #set($editvalue = $detailMsgMap.get('msgType'))
+            <option value="String" #if($editvalue == "String") selected="selected" #end>字符串类型</option>
+            <option value="byte" #if($editvalue == "byte") selected="selected" #end>字节类型</option>
+    </select>
+#end
+#macro(DBConnectionAdaptorBuild $detailMsgMap)                    
+    请求消息类型:
+    <select class="edit_input" name="reqType"  >
+        #set($editvalue = $detailMsgMap.get('reqType'))
+            <option value="parameter" #if($editvalue == "parameter") selected="selected" #end>键值对</option>
+            <option value="content" #if($editvalue == "content") selected="selected" #end>普通文本</option>
+    </select>
+    数据库名称:<input class="edit_input" type="text" name="dbName" value="$!detailMsgMap.get('dbName')"  />
+</br>
+数据库连接的用户名:<input class="edit_input" type="text" name="userName" value="$!detailMsgMap.get('userName')"   />
+数据库连接的密码:<input class="edit_input" type="text" name="password" value="$!detailMsgMap.get('password')"  />
+#end
+#macro(FileReaderAdaptorBuild $detailMsgMap)                   
+    文件读取路径:<input class="edit_input" type="text" name="path" value="$!detailMsgMap.get('path')" />
+    文件编码方式:
+    <select class="edit_input" name="charset"  >
+        #set($editvalue = $detailMsgMap.get('charset'))
+            <option value="GBK" #if($editvalue == "GBK") selected="selected" #end>GBK编码格式</option>
+            <option value="GBK2312" #if($editvalue == "GBK2312") selected="selected" #end>简体GBK2312编码</option>
+            <option value="unicode" #if($editvalue == "unicode") selected="selected" #end>unicode字符格式</option>
+            <option value="US-ASCII" #if($editvalue == "US-ASCII") selected="selected" #end>7位ASCII字符格式</option>
+            <option value="ISO-8859-1" #if($editvalue == "ISO-8859-1") selected="selected" #end>ISO拉丁字母</option>
+            <option value="UTF-8" #if($editvalue == "UTF-8") selected="selected" #end>8位UTF格式</option>
+            <option value="UTF-16" #if($editvalue == "UTF-16") selected="selected" #end>16位UTF格式</option>
+            <option value="UTF-16BE" #if($editvalue == "UTF-16BE") selected="selected" #end>UTF-16BE格式</option>
+    </select>
+#end
+#macro(FileUploadAdaptorBuild $detailMsgMap)      
+  处理结果:
+    <select class="edit_input" name="msgType"  >
+        #set($editvalue = $!detailMsgMap.get('msgType'))
+            <option value="" #if($editvalue == "") selected="selected" #end>没有设置，请先设置</option>
+            <option value="1" #if($editvalue == "1") selected="selected" #end>发送到指定的服务器</option>
+            <option value="2" #if($editvalue == "2") selected="selected" #end>保存到磁盘</option>
+    </select>
+硬盘目录地址:<input class="edit_input" type="text" name="path" value="$!detailMsgMap.get('path')"  /></br>
+<a href="#"  rel="#fileUpload" class="mi-button mi-button-lblue overlay_bt">
+    <span class="mi-button-text">文件上传</span>
+</a><br/>
+#end
+#macro(KTFileUploadAdaptorBuild $detailMsgMap)             
+主机地址:<input class="edit_input" type="text" name="host" value="$!detailMsgMap.get('host')"  />
+文件类型:<input class="edit_input" type="text" name="fileType" value="$!detailMsgMap.get('fileType')"   /></br>
+银行名称:<input class="edit_input" type="text" name="instId" value="$!detailMsgMap.get('instId')"  />
+数字证书:<input class="edit_input" type="text" name="certId" value="$!detailMsgMap.get('certId')"  /></br>
+操作日期:<input class="edit_input" type="text" name="operateDate" value="$!detailMsgMap.get('operateDate')"   />
+<a href="#"  rel="#suploadForm" class="mi-button mi-button-lblue overlay_bt">
+    <span class="mi-button-text">文件上传</span>
+</a></br>
+#end
+#macro(DecoderBuild $detailMsgMap)                    
+    解码器类型:
+    <select class="edit_input" name="Encodetype"  >
+        #set($editvalue = $detailMsgMap.get('Encodetype'))
+            <option value="base64" #if($editvalue == "base64") selected="selected" #end>base64解码</option>
+            <option value=""  #if($editvalue == "") selected="selected" #end>不选择解码器</option>
+    </select>
+    协议码:<input class="edit_input" type="text" name="codeRule" value="$!detailMsgMap.get('codeRule')"  />
+</br>
+请求消息类型:
+<select class="edit_input" name="state" >
+    #set($editvalue = $detailMsgMap.get('state'))
+        <option value="xml" #if($editvalue == "xml") selected="selected" #end>XML报文</option>
+        <option value="Keyvalue" #if($editvalue == "Keyvalue") selected="selected" #end>键值对报文</option>
+        <option value="OrigValue" #if($editvalue == "OrigValue") selected="selected" #end>OrigValue</option>
+</select>
+#end
+#macro(DESSH1SignerBuild $detailMsgMap)
+    私钥:<input class="edit_input" type="text" name="basekey" value="$!detailMsgMap.get('basekey')"  />
+    公钥:<input class="edit_input" type="text" name="workkey" value="$!detailMsgMap.get('workkey')"  />
+</br>
+是否添加签名:
+<select class="edit_input" name="signFlag" >
+    #set($editvalue = $detailMsgMap.get('signFlag'))
+        <option value="false" #if($editvalue == "false") selected="selected" #end>不需要添加</option>
+        <option value="true" #if($editvalue == "true") selected="selected" #end>需要添加</option>
+</select>
+全文是否加密:
+<select class="edit_input" name="encryptWholeMsg" >
+    #set($editvalue = $detailMsgMap.get('encryptWholeMsg'))
+        <option value="false" #if($editvalue == "false") selected="selected" #end>不需要加密</option>
+        <option value="true" #if($editvalue == "true") selected="selected" #end>需要加密</option>
+</select>
+</br>
+需要算摘要标签:<input class="edit_input" type="text" name="shaTarget" value="$!detailMsgMap.get('shaTarget')"  />
+编码格式:<input class="edit_input" type="text" name="encoding" value="$!detailMsgMap.get('encoding')"  />
+</br>
+签名是否做base64编码:
+<select class="edit_input" name="base64Flag" >
+    #set($editvalue = $detailMsgMap.get('base64Flag'))
+        <option value="false" #if($editvalue == "false") selected="selected" #end>不进行base64编码</option>
+        <option value="true" #if($editvalue == "true") selected="selected" #end>需要base64编码</option>
+</select>
+Base64编码后是否分割:
+<select class="edit_input" name="chunkFlag" >
+    #set($editvalue = $detailMsgMap.get('chunkFlag'))
+        <option value="false" #if($editvalue == "false") selected="selected" #end>不进行b分割</option>
+        <option value="true" #if($editvalue == "true") selected="selected" #end>需要分割</option>
+</select>
+</br>
+附加字段:<input class="edit_input" type="text" name="paddingChar" value="$!detailMsgMap.get('paddingChar')"  />
+签名xml标签名:<input class="edit_input" type="text" name="signTagName" value="$!detailMsgMap.get('signTagName')"  />
+</br>
+签名父标签:<input class="edit_input" type="text" name="signParentTagName" value="$!detailMsgMap.get('signParentTagName')"  />
+#end
+#macro(MD5SignerBuild $detailMsgMap)
+    加码字符串:<input class="edit_input" type="text" name="node_template" value="$!detailMsgMap.get('node_template')"  />
+    取值方式:
+    <select class="edit_input" name="style" >
+        #set($editvalue = $detailMsgMap.get('style'))
+            <option value="forward" #if($editvalue == "forward") selected="selected" #end>从返回报文中取</option>
+            <option value="origin" #if($editvalue == "origin") selected="selected" #end>从请求报文中取</option>
+    </select>
+    String的方法名:<input class="edit_input" type="text" name="stringmethod" value="$!detailMsgMap.get('stringmethod')"  />
+    取值模式:
+    <select class="edit_input" name="mode" >
+        #set($editvalue = $detailMsgMap.get('mode'))
+            <option value="0" #if($editvalue == "0") selected="selected" #end>XML</option>
+            <option value="1" #if($editvalue == "1") selected="selected" #end>定长</option>
+    </select>
+    #macro(MsgLengthParseBuild $detailMsgMap)
+        加解码是否颠倒:
+        <select class="edit_input" name="filterreverse" >
+            #set($editvalue = $detailMsgMap.get('filterreverse'))
+                <option value="true" #if($editvalue == "true") selected="selected" #end>添加字段</option>
+                <option value="false" #if($editvalue == "false") selected="selected" #end>截取字段</option>
+        </select>
+        长度位长度:<input class="edit_input" type="text" name="length" value="$!detailMsgMap.get('length')"  />
+</br>
+长度位间隔:<input class="edit_input" type="text" name="interChar" value="$!detailMsgMap.get('interChar')"  />
+长度位加码方式:
+<select class="edit_input" name="lengthEncoding" >
+    #set($editvalue = $detailMsgMap.get('lengthEncoding'))
+        <option value="BCD" #if($editvalue == "BCD") selected="selected" #end>BCD格式</option>
+        <option value="ASCII" #if($editvalue == "ASCII") selected="selected" #end>简体ASCII编码</option> 
+        <option value="ASCII10" #if($editvalue == "ASCII10") selected="selected" #end>ASCII10格式</option>
+        <option value="ASCII_8" #if($editvalue == "ASCII_8") selected="selected" #end>ASCII_8格式</option>
+        <option value="ASCII_10" #if($editvalue == "ASCII_10") selected="selected" #end>ASCII_10</option>
+        <option value="ASCIIP" #if($editvalue == "ASCIIP") selected="selected" #end>ASCIIP</option>
+</select>
+    #end
+    #macro(KeyValueParseBuild $detailMsgMap)
+        消息传递类型:
+        <select class="edit_input" name="state" >
+            #set($editvalue = $detailMsgMap.get('state'))
+                <option value="Keyvalue" #if($editvalue == "Keyvalue") selected="selected" #end>键值对报文</option>
+                <option value="xmlmax" #if($editvalue == "xmlmax") selected="selected" #end>键值对XML报文</option>
+        </select>
+默认返回值:<input class="edit_input showTips" type="text" name="defaultReturn" value="$!detailMsgMap.get('defaultReturn')"  title="可以设置默认的返回值,设置为null或者空时,走普通的匹配返回" />      
+    #end
+    #macro(SerialParseBuild $detailMsgMap)
+        消息类型:
+        <select class="edit_input" name="state" >
+            #set($editvalue = $detailMsgMap.get('state'))
+                <option value="string" #if($editvalue == "string") selected="selected" #end>字符串报文</option>
+                <option value="byte" #if($editvalue == "byte") selected="selected" #end>二进制报文</option>
+        </select>
+  默认返回值:<input class="edit_input showTips" type="text" name="defaultReturn" value="$!detailMsgMap.get('defaultReturn')"  title="可以设置默认的返回值,设置为null或者空时,走普通的匹配返回" />
+    #end
+    #macro(XMLParseBuild $detailMsgMap)
+        消息类型:
+        <select class="edit_input" name="state" >
+            #set($editvalue = $detailMsgMap.get('state'))
+                <option value="xml" #if($editvalue == "xml") selected="selected" #end>XML报文</option>
+                <option value="Fixed" #if($editvalue == "Fixed") selected="selected" #end>定长报文</option>
+        </select>
+ 默认返回值:<input class="edit_input showTips" type="text" name="defaultReturn" value="$!detailMsgMap.get('defaultReturn')"  title="可以设置默认的返回值,设置为null或者空时,走普通的匹配返回" />
+    #end
+    #macro(MessageParserBuild $detailMsgMap)
+        MTI长度:<input class="edit_input" type="text" name="MTIlength" value="$!detailMsgMap.get('MTIlength')"  />
+        8583BitMap的编码格式 :
+        <select class="edit_input" name="bitmap" >
+            #set($editvalue = $detailMsgMap.get('bitmap'))
+                <option value="Binary_64" #if($editvalue == "Binary_64") selected="selected" #end>Binary_64</option>
+                <option value="Binary_128" #if($editvalue == "Binary_128") selected="selected" #end>Binary_128</option>
+                <option value="Hex_64" #if($editvalue == "Hex_64") selected="selected" #end>Hex_64</option>
+                <option value="Hex_128" #if($editvalue == "Hex_128") selected="selected" #end>Hex_128</option>
+        </select>
+</br>
+MTI编码格式:
+        <select class="edit_input" name="MTItype" >
+            #set($editvalue = $detailMsgMap.get('MTItype'))
+                <option value="ASCII" #if($editvalue == "ASCII") selected="selected" #end>ASCII编码格式</option>
+                <option value="BCD" #if($editvalue == "BCD") selected="selected" #end>BCD编码格式</option>
+        </select>
+内容类型:
+<select class="edit_input" name="isbinary" >
+    #set($editvalue = $detailMsgMap.get('isbinary'))
+        <option value="true" #if($editvalue == "true") selected="selected" #end>二进制内容</option>
+        <option value="false" #if($editvalue == "false") selected="selected" #end>非二进制内容</option>
+</select>
+</br>
+请求/返回对应:<textarea cols="30" class="edit_input  editTextarea keyName" name="transMap"  >$!detailMsgMap.get('transMap')</textarea>
+TPDU值:<input class="edit_input" type="text" name="TPDU" value="$!detailMsgMap.get('TPDU')"  />
+    #end
+    ##这里需要分页处理
+    #macro(normalTemplate $detailMsgTemplate $bEdit)
+        #set($keycount = 1)
+        #set($valuecount = 1)
+        #foreach($member in $detailMsgTemplate.entrySet())
+            #if($member)
+                <div class="detailTools_normal_KeyValue">
+                    匹配值:<textarea cols="20" class="edit_input  editTextarea keyName" name="$keycount"  >$!member.key</textarea>
+                    返回值:<textarea  cols="50" class="edit_input  editTextarea valueName" name="$valuecount"  >$!member.value</textarea>
+                    #set($keycount=$keycount+1)
+                    #set($valuecount=$valuecount+1)
+                    #if($bEdit == true)
+                            <input class="more_add_bt" type="button" name="addBt" value="新增"/>
+                            <input class="more_delete_bt" type="button" name="delBt" value="删除"/>
+                    #end
+                </div>
+            #end
+        #end
+    #end
+    #macro(MessageParserTemplate $detailMsg_ID $detailMsgTemplate)
+        #if($detailMsgTemplate.get("j8583"))
+        <a href="#"  rel="#MessageParser$detailMsg_ID" class="mi-button mi-button-lblue overlay_bt">
+            <span class="mi-button-text">维护8583的内容</span>
+        </a>
+        <a href="edit8583Page.htm?detailId=$detailMsg_ID"  rel="#paraDetail$detailMsg_ID" class="mi-button mi-button-lblue  Parser_detail" style="text-decoration:none">
+            <span class="mi-button-text">设置8583返回值</span>
+        </a>
+        
+        <div id="MessageParser$detailMsg_ID" class="apple_overlay fn-hide mockoverlay">
+        	<form class="MessageParser_view_form" action="changeDetail.htm?action=changeParser&detailId=$detailMsg_ID" method="POST">
+        	   <textarea cols="70" rows="40" class="edit_MessageParser" name="detailValue">$!detailMsgTemplate.get('j8583')</textarea></br>
+        	    <input class="submit_bt Parser_submit_bt" type="submit"  value="提交"/>
+	        </form>       
+        </div>
+        
+        <div id="paraDetail$detailMsg_ID" class="apple_overlay fn-hide mockoverlay">
+            <div class="contentWrap"></div>
+        </div>
+        #end
+    #end
+    #macro(AssertAdaptorBuild $detailMsgMap)
+        请求消息的类型:
+        <select class="edit_input" name="reqType" >
+            #set($editvalue = $detailMsgMap.get('reqType'))
+                <option value="" #if($editvalue == " ") selected="selected" #end>没有设置</option>
+                <option value="XML" #if($editvalue == "XML") selected="selected" #end>XML报文</option>
+                <option value="FIXED" #if($editvalue == "FIXED") selected="selected" #end>定长报文</option>
+                <option value="KEYVALUE" #if($editvalue == "KEYVALUE") selected="selected" #end>键值对报文</option>
+                <option value="XMLMAX" #if($editvalue == "XMLMAX") selected="selected" #end>键值对与XML混合</option>
+        </select>
+        校验值:<input class="edit_input" type="text" name="expected" value="$!detailMsgMap.get('expected')"  />
+        <span class="mi-button mi-button-sblue">  <input type="button" class="mi-button-text delAssert" value="删除该Assert工具" /></span>
+    #end
+#end

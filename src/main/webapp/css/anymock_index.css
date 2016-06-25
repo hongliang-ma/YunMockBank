@@ -1,0 +1,32 @@
+/* ------ general
+-----------------------------------------------*/
+
+body {
+font-family:Arial, Helvetica, sans-serif;
+background:#F1F1F1;
+}
+
+#middleitem {
+margin:0 auto;
+top:20px;
+background-image:url(../images/mock.png);
+background-repeat:no-repeat;
+background-position:center;
+}
+
+.item {
+  width: 500px;
+  margin: 10px;
+  float: left;
+}
+
+
+img,a img{ 
+border:0;  
+margin:0;  
+padding:0; 
+max-width:500px; 
+width:expression(this.width>500?"500px":this.width); 
+max-height:600px; 
+height:expression(this.height>600?"600px":this.height); 
+}

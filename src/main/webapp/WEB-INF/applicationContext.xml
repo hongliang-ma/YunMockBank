@@ -1,0 +1,98 @@
+<?xml  version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.mock" />
+	<context:property-placeholder location="classpath:db.properties"/>
+	
+
+    <!-- velocity视图解析配置  -->
+	<bean id="velocityConfigurer"
+		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath">
+			<value>/WEB-INF/templates/</value>
+		</property>
+		<property name="velocityProperties">
+			<props>
+				<prop key="input.encoding">gbk</prop>
+				<prop key="output.encoding">gbk</prop>
+				<prop key="velocimacro.library">macro/macros-default.vm</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+          <property name="cache"><value>true</value></property>
+          <property name="suffix"><value>.vm</value></property>
+          <property name="contentType"><value>text/html;charset=gbk</value></property>
+          <property name="exposeSpringMacroHelpers"><value>true</value></property>
+          <property name="exposeRequestAttributes"><value>true</value></property>
+          <property name="layoutUrl"><value>layout/default.vm</value></property>
+   </bean>
+	
+	
+	<!--<bean id="viewResol"
+		class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<property name="suffix">
+			<value>.vm</value>
+		</property>
+		<property name="contentType">
+			<value>text/html;charset=gbk</value>
+		</property>
+	</bean>
+	--><bean id="viewResolverSession"
+		class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<property name="suffix">
+			<value>.vm</value>
+		</property>
+		<property name="contentType">
+			<value>text/html;charset=gbk</value>
+		</property>
+		<property name="exposeSessionAttributes">
+			<value>true</value>
+		</property>
+	</bean>
+	
+	<!-- ============================  DataSource配置   =============================== -->
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${username}"></property>
+		<property name="password" value="${password}"></property>
+	</bean>
+	
+	
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="/WEB-INF/sqlMapConfig.xml" />
+      	<property name="dataSource" ref="dataSource" />
+	</bean><!--
+	
+	
+	<bean id="userDao" class="com.mock.dao.impl.UserDaoImpl" >
+			<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	-->
+	<bean id="userDao" class="com.mock.dal.ibatis.IbatisUserDAO" >
+			<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	
+	
+
+</beans>

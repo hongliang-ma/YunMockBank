@@ -1,0 +1,10 @@
+#set($layout="layout/errorpage.vm")
+
+<div id="rocket"></div>
+
+<hgroup>
+    <h1>Anymock发生异常</h1>
+    <h2>请点击返回返回到主页，多次出现该页，请联系测试技术组</h2>
+    <input type="button" value="返回" onclick="history.back()"/>
+</hgroup>
+    

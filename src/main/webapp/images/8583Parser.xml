@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="GBK"?>
+<j8583cn-config>
+<!--
+These are the 8583 headers to be prepended to the message types
+specified
+-->
+<header length="5">0800</header>
+<header length="5">0810</header>
+<!--签到解析-->
+<parseinfo msgtypeid="0800">
+<field id="3" datatype="NUMERIC" length="6" name="处理码"/>
+<field id="25" datatype="BCD" length="2" name="服务点条件代码"/>
+<field id="41" datatype="ALPHA" length="8" name="终端号"/>
+<field id="42" datatype="ALPHA" length="15" name="商户号"/>
+<field id="60" datatype="LLLVAR" name="操作员号和敏感数据"/>
+</parseinfo>
+
+<!--签到返回-->
+<template msgtypeid="0810">
+<field id="3" datatype="NUMERIC" length="6" name="处理码">940000</field>
+<field id="11" datatype="NUMERIC" length="6" name="POS流水号">123456</field>
+<field id="12" datatype="NUMERIC" length="6" name="交易时间">120130</field>
+<field id="13" datatype="NUMERIC" length="4" name="交易日期">0314</field>
+<field id="25" datatype="NUMERIC" length="2" name="服务点条件代码">08</field>
+<field id="39" datatype="ALPHA" length="2" name="响应码">00</field>
+<field id="41" datatype="ALPHA" length="8" name="终端号">GET</field>
+<field id="42" datatype="ALPHA" length="15" name="商户号">103330458132811</field>
+<field id="61" datatype="LLLVARHEX" crule="right" name="工作密钥" length="33">1E8B001C0CFB7B101E8B001C0CFB7B100</field>
+<field id="62" datatype="LLLVAR" crule="right" name="凭证号批次号">000000110314</field>
+<field id="63" datatype="LLLVAR" crule="right" name="终端工作参数">EMTPA</field>
+</template>
+</j8583cn-config>

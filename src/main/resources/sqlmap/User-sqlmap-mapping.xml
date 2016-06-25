@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+
+    
+    <resultMap id="RM.User" class="com.mock.dal.dataobject.UserDO">
+		<result property="id" column="ID" javaType="long" jdbcType="BIGINT"  nullValue="0"  />
+		<result property="username" column="USERNAME" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="password" column="PASSWORD" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="superuser" column="SUPERUSER" javaType="java.lang.String" jdbcType="VARCHAR"  />
+    </resultMap>
+    
+
+	
+	
+    
+	<insert id="anymock.User.insert">
+		<![CDATA[
+				insert into anymock_user 
+				   (
+				   username,
+				   password,
+				   superuser
+				   )
+				values
+				(#username#,#password#,#superuser#)
+			]]>
+		<selectKey resultClass="long" type="post" keyProperty="id" >
+            select last_insert_id()
+    	</selectKey>        
+	</insert>
+	
+	<select id="anymock.User.loadAll" resultMap="RM.User" >
+    	<![CDATA[
+				select
+ /*anymock.User.loadAll*/ 						id,
+				    username,
+				    password,
+				    superuser
+				from anymock_user
+			]]>
+	</select>	
+
+	    
+	
+	
+    
+	
+	<select id="anymock.User.selectByName" resultMap="RM.User" >
+    	<![CDATA[
+				select
+ /*anymock.User.selectByName*/ 			    id, username,password,
+			    superuser
+			  from anymock_user
+			  where username =#username#
+			]]>
+	</select>	
+
+	    
+	
+	
+    
+	
+	<update id="anymock.User.upSuperStatus">
+		<![CDATA[
+				update anymock_user set
+			    superuser = #superuser#
+			  where username =#username#
+			]]>
+	</update>
+	
+    
+
+</sqlMap>
+

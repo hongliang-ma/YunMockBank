@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="gb2312">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MOCKƽ̨</title>
+<link href="/css/tip-yellowsimple.css" rel="stylesheet" type="text/css" />
+<link href="/css/anymock_index.css" rel="stylesheet" type="text/css" />
+	
+ <script type="text/javascript" src="/scripts/lib/jquery.js"></script>
+ <script type="text/javascript" src="/scripts/lib/jquery.cookie.js"></script>
+ <script type="text/javascript" src="/scripts/lib/jquery.masonry.min.js"></script>
+<script type="text/javascript" src="/scripts/lib/jquery.poshytip.min.js"></script>
+ 
+ <script type="text/javascript" src="/scripts/anymock_cookie.js"></script>
+ <script type="text/javascript" src="/scripts/anymock_cookie.js"></script>
+   <script type="text/javascript" src="/scripts/anymock_index.js"></script>
+</head>
+<body id="content">
+     <div>$screen_placeholder</div>
+</body>
+</html>

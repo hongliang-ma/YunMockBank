@@ -1,0 +1,38 @@
+<div class="mi-grid-row">
+        <div class="mi-grid-20  mi-table">
+            <table cellpadding="5" cellspacing="0" border="1" class="display" id="example" align="left">
+                <thead>
+                    <tr>
+                        <th>报文ID</th>
+                        <th>报文名字</th>
+                        <th>通讯地址</th>
+                        <th>通讯类型</th>
+                        <th>匹配值</th>
+                        <th>标签</th>
+                        <th>次数</th>
+                        <th>查看</th>
+                    </tr>
+                </thead>
+<tbody>
+#foreach($!UserInfo in $!listUserInfo)
+    <tr class="gradeB">
+        <td>$!UserInfo.templateInnerId</td>
+        <td>$!UserInfo.templateName</td>
+        <td>$!UserInfo.templateUrl</td>
+        <td>$!UserInfo.templateType.description</td>
+        <td>$!UserInfo.matchString</td>
+        <td>$!UserInfo.templateLable</td>
+        <td class="center">$!UserInfo.templateCount</td>
+        <td class="center">
+            <a href="#" class="clickView" value="$!UserInfo.templateGetPara">
+                <img class="changeTitle" src="images/details_open.png"/>
+            </a>
+        </td>
+    </tr>
+#end
+</tbody>
+<tfoot>
+</tfoot>
+</table>
+</div>
+</div>

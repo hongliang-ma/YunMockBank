@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="gb2312">
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <title>ANYMOCK3.0</title>
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.base-1.0.css"/>
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-font-1.0-full.css"/>
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-function-1.0-full.css"/>
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-button-1.0-full.css"/>
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-footer-1.0-full.css"/>
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-header-1.0-full.css"/>
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-form-1.0-full.css"/>
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-grid-1.0-full.css"/>
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-line-1.0-full.css"/>
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-message-1.0-full.css"/>
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-notice-1.0-full.css"/>
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-paging-1.0-full.css"/>
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-tab-1.0-full.css"/>
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-table-1.0-full.css"/>
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-tip-1.0-full.css"/>
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.mi-nav-1.0-SNAPSHOT-full.css"/>
+            <link rel="stylesheet" href="http://assets.dev.alipay.net/al/alice.components.ui-list-1.0-full.css"/>
+                
+            <link href="css/demo_table_jui.css" rel="stylesheet" type="text/css" />
+            <link href="css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+            <link href="css/jquery-ui-1.8.4.custom.css" rel="stylesheet" type="text/css" />
+            <link href="css/jquery.alerts.css" rel="stylesheet" type="text/css" />
+            <link href="css/jquery.confirm.css" rel="stylesheet" type="text/css" />
+            <link href="css/homepage.css" rel="stylesheet" type="text/css" />
+            <link href="scripts/codemirror-2.35/lib/codemirror.css" rel="stylesheet" type="text/css" />
+            <link href="scripts/codemirror-2.35/theme/ambiance.css" rel="stylesheet" type="text/css" />
+            <link href="css/tip-yellowsimple.css" rel="stylesheet" type="text/css" />
+                        
+            <script type="text/javascript" src="scripts/lib/jquery.js"></script>
+            <script type="text/javascript" src="scripts/lib/jquery.cookie.js"></script>
+            <script type="text/javascript" src="scripts/lib/jquery.dataTables.min.js"></script>
+            <script type="text/javascript" src="scripts/lib/jquery.confirm.js"></script>
+            <script type="text/javascript" src="scripts/lib/jquery.form.js"></script>
+            <script type="text/javascript" src="scripts/lib/jquery.alerts.js"></script>
+			<script type="text/javascript" src="scripts/lib/jquery.fileupload.js"></script>
+            <script type="text/javascript" src="scripts/lib/autoTextarea.js"></script>
+            <script type="text/javascript" src="scripts/lib/nav-jquery.js"></script>
+            <script type="text/javascript" src="scripts/lib/jquery.tools.min.js"></script>
+             <script type="text/javascript" src="scripts/lib/jquery.poshytip.min.js"></script>
+                        
+            <script type="text/javascript" src="scripts/anymock_cookie.js"></script>
+            <script type="text/javascript" src="scripts/anymock_homepage.js"></script>
+            <script type="text/javascript" src="scripts/anymock_content.js"></script>
+            <script type="text/javascript" src="scripts/anymock_floatPage.js"></script>  
+</head>
+<body>
+    <div class="layout">
+        <div class="header">
+            #parse('tile/header.vm')
+        </div>
+        <div class="header-nav">
+        	#parse('tile/nav.vm')
+        </div>
+        <div class="content">
+            $screen_content
+        </div>
+        <div class="footer">
+        	#parse('tile/foot.vm')
+        </div>
+    </div>
+</body>
+</html>

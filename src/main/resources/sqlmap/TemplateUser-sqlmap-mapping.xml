@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+
+    
+    <resultMap id="RM.TemplateUser" class="com.mock.common.dal.dataobject.TemplateUserDO">
+		<result property="id" column="ID" javaType="long" jdbcType="BIGINT"  nullValue="0"  />
+		<result property="innerid" column="INNERID" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="systemInnerid" column="SYSTEM_INNERID" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="bindInnerid" column="BIND_INNERID" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="matchstr" column="MATCHSTR" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="isdefault" column="ISDEFAULT" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="templateName" column="TEMPLATE_NAME" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="count" column="COUNT" javaType="int" jdbcType="INTEGER"  nullValue="0"  />
+		<result property="username" column="USERNAME" javaType="java.lang.String" jdbcType="VARCHAR"  />
+		<result property="gmtCreate" column="GMT_CREATE" javaType="java.util.Date" jdbcType="TIMESTAMP"  />
+		<result property="gmtModified" column="GMT_MODIFIED" javaType="java.util.Date" jdbcType="TIMESTAMP"  />
+    </resultMap>
+    
+
+	
+	<select id="anymock.TemplateUser.loadAll" resultMap="RM.TemplateUser" >
+    	<![CDATA[
+				select
+ /*anymock.TemplateUser.loadAll*/ 						id,
+				    innerid,
+				    system_innerid,
+				    bind_innerid,
+				    matchstr,
+				    isdefault,
+				    template_name,
+				    count,
+				    username,
+          gmt_create,
+          gmt_modified
+				from anymock_template_user
+				order by count
+			]]>
+	</select>	
+
+	    
+	
+	
+    
+	
+	<select id="anymock.TemplateUser.selectByDefault" resultClass="String" >
+    	<![CDATA[
+				select
+ /*anymock.TemplateUser.selectByDefault*/ 				    innerid
+				from anymock_template_user
+				where isdefault="TRUE" and system_innerid = #systemInnerid#
+			]]>
+	</select>	
+
+	    
+	
+	
+    
+	
+	<select id="anymock.TemplateUser.selectByInnerId" resultMap="RM.TemplateUser" >
+    	<![CDATA[
+				select
+ /*anymock.TemplateUser.selectByInnerId*/ 						id,
+				    innerid,
+				    system_innerid,
+				    bind_innerid,
+				    matchstr,
+				    isdefault,
+				    template_name,
+				    count,
+				    username,
+          gmt_create,
+          gmt_modified
+				from anymock_template_user
+				where innerid=#innerid#
+			]]>
+	</select>	
+
+	    
+	
+	
+    
+	
+	<select id="anymock.TemplateUser.selectBySysId" resultMap="RM.TemplateUser" >
+    	<![CDATA[
+				select
+ /*anymock.TemplateUser.selectBySysId*/ 						id,
+				    innerid,
+				    system_innerid,
+				    bind_innerid,
+				    matchstr,
+				    isdefault,
+				    template_name,
+				    count,
+				    username,
+          gmt_create,
+          gmt_modified
+				from anymock_template_user
+				where system_innerid = #systemInnerid#
+			]]>
+	</select>	
+
+	    
+	
+	
+    
+	
+	<select id="anymock.TemplateUser.selectByUser" resultMap="RM.TemplateUser" >
+    	<![CDATA[
+				select
+ /*anymock.TemplateUser.selectByUser*/ 						id,
+				    innerid,
+				    system_innerid,
+				    bind_innerid,
+				    matchstr,
+				    isdefault,
+				    template_name,
+				    count,
+				    username,
+          gmt_create,
+          gmt_modified
+				from anymock_template_user
+				where username = #username#
+			]]>
+	</select>	
+
+ 
+	<insert id="anymock.TemplateUser.insert">
+		<![CDATA[
+				insert into anymock_template_user(
+					innerid,
+					system_innerid,
+					matchstr,
+					isdefault,
+					template_name,
+					username,
+          gmt_create,
+          gmt_modified
+				) values (#innerid#,#systemInnerid#,#matchstr#,#isdefault#,#templateName#,#username#,sysdate(),sysdate())
+        	]]>
+		<selectKey resultClass="long" type="post" keyProperty="id" >
+            select last_insert_id()
+    	</selectKey>        
+	</insert>
+	
+	<select id="anymock.TemplateUser.selectCount" resultClass="int" >
+    	<![CDATA[
+				select
+ /*anymock.TemplateUser.selectCount*/ 				    count
+				from anymock_template_user
+				where innerid=#innerid#
+			]]>
+	</select>	
+
+	    
+	
+	
+    
+	
+	<update id="anymock.TemplateUser.updateCount">
+		<![CDATA[
+				update  anymock_template_user set
+					count = count+1,
+					gmt_modified =sysdate()
+				where innerid =#innerid#
+			]]>
+	</update>
+	
+    
+	
+	<update id="anymock.TemplateUser.updateMatchstr">
+		<![CDATA[
+				update  anymock_template_user set
+					matchstr =#matchstr#,
+					gmt_modified =sysdate()
+				where innerid =#innerid#
+			]]>
+	</update>
+	
+    
+	
+	<update id="anymock.TemplateUser.updateTemplateName">
+		<![CDATA[
+				update  anymock_template_user set
+					template_name =#templateName#,
+					gmt_modified =sysdate()
+				where innerid =#innerid#
+			]]>
+	</update>
+	
+    
+	
+	<update id="anymock.TemplateUser.updateDefault">
+		<![CDATA[
+				update  anymock_template_user set
+					isdefault =#isdefault#,
+					gmt_modified =sysdate()
+				where innerid =#innerid#
+			]]>
+	</update>
+	    
+	
+	<update id="anymock.TemplateUser.updatetBind">
+		<![CDATA[
+				update  anymock_template_user set
+					bind_innerid =#bindInnerid#,
+					gmt_modified =sysdate()
+				where innerid =#innerid#
+			]]>
+	</update>
+	
+    
+	   
+	
+	
+	<delete id="anymock.TemplateUser.deleteByInnerid">
+		<![CDATA[
+				delete from  anymock_template_user
+				where innerid = #innerid#
+    		]]>
+    </delete>
+    
+
+</sqlMap>
+

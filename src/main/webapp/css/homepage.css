@@ -1,0 +1,417 @@
+body {
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    font-family: Arial;
+    overflow-x: hidden;
+}
+
+.content, .header-nav, .footer {
+    margin:0 10px;
+}
+
+.footer {
+    margin:10px 10px 0;
+}
+
+.header {
+    height:62px;
+    background:#fff url("https://i.alipayobjects.com/e/201206/2pjJCOKdfF.png") repeat-x 0 -81px;
+    border-top:3px solid #f60;
+    border-bottom:1px solid #d6d6d6;
+}
+.header-cnt {
+    height:100%;
+}
+
+.header-logo-text {
+    display:inline-block;
+    *display:inline;
+    *zoom:1;
+    height:26px;
+    color:#4d4d4d;
+    margin:7px 0 0 6px;
+    padding:0 0 0 10px;
+    overflow:hidden;
+    border-left:1px solid #a5a5a5;
+    font:500 20px "Microsoft YaHei";
+}
+
+.ui-footer {margin-top: 30px; border-top: 1px solid #cccccc; height: 100px; }
+.ui-footer-ctn {border-top: 1px solid #ffffff;padding-top: 15px;text-align: center;}
+.ui-footer-link a {padding: 0 3px 0 2px;}
+.ui-footer-copyright,.ui-footer-phone {padding-top: 10px;}
+.server{color:#fff;}
+.copyright,.copyright a,.copyright a:hover{color:#808080;}
+
+.site-nav {
+    width:75%;
+    float:right;
+    height: 32px;
+    color: #bfcdd8;
+    background-color:transparent;
+}
+
+.site-nav .site-con {
+    width:100%;
+    height: 30px;
+}
+
+
+.site-nav h2 {
+    float: left;
+    color: #666666;
+    line-height: 32px;
+}
+
+.site-nav .site-meta {
+    float: right;
+    color: #6585c6;
+}
+
+
+.site-nav .site-meta a {
+    color: #666666;
+}
+/** 修复引用的alice.common-v1样式问题 */
+.site-nav .global-toplink .global-toplink-username {
+    background-color: #F7F7F7;
+}
+
+.site-nav .global-dropdown-active .global-toplink-username {
+    background-color: #FFF;
+}
+
+.global-toplink {
+    padding:10px 10px 0;
+}
+
+.header-nav, .content {
+    width:990px;
+    margin:0 auto;
+}
+
+.right_content {
+  font-weight: normal;
+  filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
+  text-align: left;
+  font-family: "宋体";
+  font-size: 15.0px;
+  line-height: 135%;
+  column-count:2;
+  column-width:10px;
+  column-gap:10px;
+-moz-border-radius: 24px;
+-webkit-border-radius: 24px;
+border-radius: 24px;
+/*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+-moz-box-shadow: 0px 0px 7px #000000;
+-webkit-box-shadow: 0px 0px 7px #000000;
+box-shadow: 0px 0px 7px #000000;
+/*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#AAAAAA', endColorstr = '#AAAAAA');
+/*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+/*Element must have a height (not auto)*/
+/*All filters must be placed together*/
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr = '#AAAAAA', endColorstr = '#AAAAAA')";
+/*Element must have a height (not auto)*/
+/*All filters must be placed together*/
+
+}
+
+.footer-simple {
+padding-top:100px;
+width: 100%;
+height: 77px;
+}
+
+
+#nosearch {
+    font-family:Arial,Verdana,Sans-serif;
+    font-size: 200%;
+    font-style:oblique;
+    color: red;
+    aligh:left;
+}
+
+
+
+
+#showUserInfo {
+    width: 100%;
+    background-color:  url("../images/bg_vertical.jpg") repeat;
+    font-family: Tahoma;
+    font-size: 16px;
+}
+
+
+#userInfo_head_name #userInfo_head_middle #userInfo_test_SendMsg{
+  padding-top:15px;
+  padding-left:40px; 
+}
+
+
+#userInfo_test_SendMsg {
+    padding-left:30%;
+}
+
+#userInfo_splite {
+    background-color: blue;
+}
+
+#userInfo_tail {
+    padding-top:15px;
+    padding-left:30%;
+}
+
+.submit_bt:hover {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #378de5), color-stop(1, #79bbff) );
+    background:-moz-linear-gradient( center top, #378de5 5%, #79bbff 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#378de5', endColorstr='#79bbff');
+    background-color:#378de5;
+}.submit_bt:active {
+    position:relative;
+    top:1px;
+}
+
+.cancel_bt:hover {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #a341ee), color-stop(1, #c579ff) );
+    background:-moz-linear-gradient( center top, #a341ee 5%, #c579ff 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#a341ee', endColorstr='#c579ff');
+    background-color:#a341ee;
+}.cancel_bt:active {
+    position:relative;
+    top:1px;
+}
+
+#userInfo_tail_default,#userInfo_tail_default_other {
+    -moz-box-shadow:inset -2px 1px 20px 6px #f9eca0;
+    -webkit-box-shadow:inset -2px 1px 20px 6px #f9eca0;
+    box-shadow:inset -2px 1px 20px 6px #f9eca0;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f0c911), color-stop(1, #f2ab1e) );
+    background:-moz-linear-gradient( center top, #f0c911 5%, #f2ab1e 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0c911', endColorstr='#f2ab1e');
+    background-color:#f0c911;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    border:1px solid #e65f44;
+    display:inline-block;
+    color:#c92200;
+    font-family:Arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:8px 25px;
+    text-decoration:none;
+    text-shadow:-1px -2px 0px #ded17c;
+}#userInfo_tail_default:hover {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f2ab1e), color-stop(1, #f0c911) );
+    background:-moz-linear-gradient( center top, #f2ab1e 5%, #f0c911 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2ab1e', endColorstr='#f0c911');
+    background-color:#f2ab1e;
+}#userInfo_tail_default:active {
+    position:relative;
+    top:1px;
+}
+
+#userInfo_tail_delete {
+    -moz-box-shadow:inset -2px 1px 20px 6px #f29c93;
+    -webkit-box-shadow:inset -2px 1px 20px 6px #f29c93;
+    box-shadow:inset -2px 1px 20px 6px #f29c93;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fe1a00), color-stop(1, #ce0100) );
+    background:-moz-linear-gradient( center top, #fe1a00 5%, #ce0100 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fe1a00', endColorstr='#ce0100');
+    background-color:#fe1a00;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    border:1px solid #d83526;
+    display:inline-block;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:8px 25px;
+    text-decoration:none;
+    text-shadow:-1px -2px 0px #b23e35;
+}#userInfo_tail_delete:hover {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00) );
+    background:-moz-linear-gradient( center top, #ce0100 5%, #fe1a00 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00');
+    background-color:#ce0100;
+}#userInfo_tail_delete:active {
+    position:relative;
+    top:1px;
+}
+
+#userInfo_tail_Copy {
+    -moz-box-shadow:inset -2px 1px 20px 6px #f9eca0;
+    -webkit-box-shadow:inset -2px 1px 20px 6px #f9eca0;
+    box-shadow:inset -2px 1px 20px 6px #f9eca0;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f0c911), color-stop(1, #f2ab1e) );
+    background:-moz-linear-gradient( center top, #f0c911 5%, #f2ab1e 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0c911', endColorstr='#f2ab1e');
+    background-color:#f0c911;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    border:1px solid #e65f44;
+    display:inline-block;
+    color:#c92200;
+    font-family:Arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:8px 25px;
+    text-decoration:none;
+    text-shadow:-1px -2px 0px #ded17c;
+}#userInfo_tail_Copy:hover {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f2ab1e), color-stop(1, #f0c911) );
+    background:-moz-linear-gradient( center top, #f2ab1e 5%, #f0c911 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2ab1e', endColorstr='#f0c911');
+    background-color:#f2ab1e;
+}#userInfo_tail_Copy:active {
+    position:relative;
+    top:1px;
+}
+
+#head_SendMsgt_bt {
+    -moz-box-shadow:inset 3px 1px 0px 0px #caefab;
+    -webkit-box-shadow:inset 3px 1px 0px 0px #caefab;
+    box-shadow:inset 3px 1px 0px 0px #caefab;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #77d42a), color-stop(1, #5cb811) );
+    background:-moz-linear-gradient( center top, #77d42a 5%, #5cb811 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77d42a', endColorstr='#5cb811');
+    background-color:#77d42a;
+    -moz-border-radius:42px;
+    -webkit-border-radius:42px;
+    border-radius:42px;
+    border:7px solid #268a16;
+    display:inline-block;
+    color:#306108;
+    font-family:Georgia;
+    font-size:15px;
+    font-weight:bold;
+    padding:13px 62px;
+    text-decoration:none;
+    text-shadow:1px 1px 17px #aade7c;
+}#head_SendMsgt_bt:hover {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #5cb811), color-stop(1, #77d42a) );
+    background:-moz-linear-gradient( center top, #5cb811 5%, #77d42a 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#5cb811', endColorstr='#77d42a');
+    background-color:#5cb811;
+}#head_SendMsgt_bt:active {
+    position:relative;
+    top:1px;
+}
+
+
+.simple_overlay { 
+    /* must be initially hidden */
+    /* place overlay on top of other elements */
+    display:none;
+    z-index:10000; 
+    /* styling */
+    background-color:#333;
+    min-width:1000px;
+    min-height:300px;
+    max-height:600px;
+    overflow-y:auto;
+    width:1000px;
+    border:1px solid #666; 
+    /* CSS3 styling for latest browsers */
+    -moz-box-shadow:0 0 90px 5px #000;
+    -webkit-box-shadow: 0 0 90px #000;
+}
+
+.simple_overlay .close {
+    background-image:url(../images/close.png);
+    position:absolute;
+    right:0px;
+    top:0px;
+    cursor:pointer;
+    height:35px;
+    width:35px;
+}
+
+.detailTools_MoreKeyValue,.msgSendDiv {
+font-family: Microsoft YaHei;
+font-size:15px;
+color:#aba;
+font-weight:bold;
+}
+
+.showTitle{ 
+display: block;
+text-align:center;
+margin:0 auto;
+font-family: Microsoft YaHei;
+font-size:14px;
+font-weight:bold;
+}
+
+
+input.edit_input,select.edit_input {
+   width: 300px;
+}
+
+.main-nav li {
+    float: left;
+    font-size: 50px;
+    font-weight: 60px;
+    line-height: 60px;
+}
+
+.main-nav li.my-add i {
+    background-position: 0 0;
+    height: 30px;
+    width: 30px;
+} 
+
+.mockoverlay {
+   background-color: gray;
+   color:#efefef;
+    height:700px;
+  }
+  /* container for external content. uses vertical scrollbar, if needed */
+  div.contentWrap {
+    height:700px;
+    width:450px;
+    overflow-y:auto;
+  }
+  
+ /* the overlayed element */
+.apple_overlay {
+
+    /* initially overlay is hidden */
+    display:none;
+    /*
+      width after the growing animation finishes
+      height is automatically calculated
+      */
+     width:450px;
+
+    /* some padding to layout nested elements nicely  */
+    padding:35px;
+
+    /* a little styling */
+    font-size:11px;
+}
+
+/* default close button positioned on upper right corner */
+.apple_overlay .close {
+    background-image:url(../images/close.png);
+    position:absolute; right:5px; top:5px;
+    cursor:pointer;
+    height:35px;
+    width:35px;
+}
+
+.TipsWord {
+    color: #FF7300;
+    font-size: 14px;
+    font-weight: bold;
+    height: 33px;
+    line-height: 30px;
+    padding: 5px 5px 5px 38px;
+}

@@ -1,0 +1,26 @@
+<div class="ui-footer fn-clear">
+    <div class="ui-footer-ctn">
+        <div class="ui-footer-link">
+            <a href="http://anymock.test.alipay.net" target="_blank">anymock test环境</a><em class="ft-bar"> | </em> 
+            <a target="_blank" href="http://anymock.test.alipay.net">anymock stable环境</a><em class="ft-bar"> | </em> 
+            <a target="_blank" href="http://qa.inc.alipay.net/tcenter/home.php">Tcenter</a><em class="ft-bar"> | </em> 
+            <a target="_blank" href="http://api.test.alipay.net/admin/user_login.htm">接口测试</a><em class="ft-bar"> | </em>
+            <a target="_blank" href="http://apitest.backup.alipay.net/admin/user_login.htm">接口测试备份环境</a><em class="ft-bar"> | </em> 
+            <a target="_blank" href="http://qa.inc.alipay.net/blog/">测试界</a><em class="ft-bar"> | </em> 
+            <a target="_blank" href="http://cq.alipay.net/cqweb/login">CQ平台</a><em class="ft-bar"> | </em>
+            <a target="_blank" href="http://jenkins.alipay.net:8080/">持续集成</a><em class="ft-bar"> | </em>
+            <a href="http://dev.lab.alipay.net/api/" target="_blank">ats帮助文档</a><em class="ft-bar"> | </em>
+            <a target="_blank" href="http://alipay.im/">支付宝内网地址收集</a><em class="ft-bar"> | </em>
+            <a target="_blank" href="http://www.alibabatech.org/">ATA技术论坛</a>
+        </div>
+        <div class="ui-footer-copyright">
+            <div class="copyright">
+                支付宝版权所有(Anymock 3.0) 测试技术组出品 &nbsp;&nbsp;
+                前端模板支持：<a href="http://tools.alipay.im/alipay_SH_F2E_Lab/03.html" target="_blank">商户前端样式库</a>
+            </div>
+            <div class="server" id="ServerNum">
+            </div>
+        </div>
+
+    </div>
+</div>
